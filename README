@@ -18,18 +18,10 @@ SETUP
 
 Running the parser
   `ruby parse_properties.rb`
-
-Updating weather info
-  Install redis 
-    wget http://download.redis.io/redis-stable.tar.gz
-    tar xvzf redis-stable.tar.gz
-    cd redis-stable
-    make
-    sudo make install
-  start redis server
-    redis-server
-  start sidekiq process
-    bundle exec sidekiq -r ./worker.rb
-  
-  https://www.weather.gov/documentation/services-web-api 
-  Example: https://api.weather.gov/gridpoints/TOP/31,80/forecast 
+  This will parse the xml file and add the following info on any Madison properties to the database. 
+    property_id
+    name
+    email
+    bedroom_count
+    latitude
+    longitude
