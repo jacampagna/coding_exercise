@@ -1,0 +1,35 @@
+  Reads an XML file from https://s3.amazonaws.com/abodo-misc/sample_abodo_feed.xml and extracts the property_id, email, name, and number of bedrooms for that property.
+
+PREREQUISITES
+  Install docker, ruby, and dynomodb local
+    https://docs.docker.com/get-docker/
+    https://www.ruby-lang.org/en/documentation/installation/
+    https://hub.docker.com/r/amazon/dynamodb-local/ 
+
+SETUP
+  install bundler:
+    `gem install bundler`
+  install gems
+    `bundle install`
+  start docker db instance
+    `docker run -p 8000:8000 amazon/dynamodb-local`
+  setup database
+    `ruby db_setup.rb`
+
+Running the parser
+  `ruby parse_properties.rb`
+
+Updating weather info
+  Install redis 
+    wget http://download.redis.io/redis-stable.tar.gz
+    tar xvzf redis-stable.tar.gz
+    cd redis-stable
+    make
+    sudo make install
+  start redis server
+    redis-server
+  start sidekiq process
+    bundle exec sidekiq -r ./worker.rb
+  
+  https://www.weather.gov/documentation/services-web-api 
+  Example: https://api.weather.gov/gridpoints/TOP/31,80/forecast 
